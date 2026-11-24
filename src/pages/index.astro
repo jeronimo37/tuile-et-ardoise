@@ -1,0 +1,36 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const projects = (await getCollection('realisations')).filter((p) => p.data.featured).slice(0, 3);
+---
+<MainLayout title="tuile&ardoise | Couverture et charpente traditionnelle" description="Entreprise de couverture en ardoise naturelle et charpente traditionnelle à L’Île-Bouchard et dans ses environs, en Indre-et-Loire.">
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Couverture · Charpente traditionnelle</p>
+      <h1>La tradition du travail bien fait.</h1>
+      <p class="lead">L’ardoise, le bois et le savoir-faire artisanal au service de votre toiture.</p>
+      <a class="button" href="/contact/">Parlons de votre projet</a>
+    </div>
+    <div class="hero-image" role="img" aria-label="Toiture traditionnelle en ardoise naturelle"></div>
+  </section>
+
+  <section class="intro section">
+    <p class="eyebrow">tuile&ardoise</p>
+    <h2>Une toiture pensée pour durer.</h2>
+    <p>Nous accompagnons vos projets de couverture et de charpente, en neuf comme en rénovation. Chaque chantier mérite une attention particulière, des matériaux adaptés et un travail soigné.</p>
+  </section>
+
+  <section class="services section">
+    <article><span>01</span><h3>Couverture</h3><p>Ardoise naturelle, rénovation, entretien et réparations de toiture.</p><a href="/couverture/">Découvrir</a></article>
+    <article><span>02</span><h3>Charpente</h3><p>Charpente traditionnelle, travaux de structure et rénovation.</p><a href="/charpente/">Découvrir</a></article>
+  </section>
+
+  {projects.length > 0 && <section class="section projects">
+    <div class="section-heading"><div><p class="eyebrow">Sur le terrain</p><h2>Quelques réalisations</h2></div><a href="/realisations/">Toutes les réalisations</a></div>
+    <div class="project-grid">{projects.map((project) => <ProjectCard project={project} />)}</div>
+  </section>}
+
+  <section class="contact-band"><p class="eyebrow">Un projet en tête ?</p><h2>Échangeons sur vos travaux.</h2><a class="button button-light" href="/contact/">Demander un devis</a></section>
+</MainLayout>

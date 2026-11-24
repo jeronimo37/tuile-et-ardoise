@@ -1,0 +1,12 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+import ProjectCard from '../components/ProjectCard.astro';
+const projects = (await getCollection('realisations')).sort((a,b) => (b.data.date?.valueOf() ?? 0) - (a.data.date?.valueOf() ?? 0));
+---
+<MainLayout title="Réalisations | tuile&ardoise" description="Découvrez des exemples de travaux de couverture et de charpente réalisés par tuile&ardoise.">
+  <section class="page-hero"><p class="eyebrow">Du concret, sur le terrain</p><h1>Réalisations</h1><p class="lead">Quelques exemples de travaux et de savoir-faire.</p></section>
+  <section class="section">
+    {projects.length ? <div class="project-grid">{projects.map((project) => <ProjectCard project={project} />)}</div> : <p>Les premières réalisations seront bientôt présentées ici.</p>}
+  </section>
+</MainLayout>

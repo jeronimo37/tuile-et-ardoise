@@ -1,0 +1,33 @@
+---
+import '../styles/global.css';
+const { title, description } = Astro.props;
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#292b2d" />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand-logo" href="/" aria-label="Accueil tuile&ardoise"><img src="/images/Logo tuile et ardoise.png" alt="tuile&ardoise — Charpente et Couverture Traditionnel" /></a>
+      <nav aria-label="Navigation principale">
+        <a href="/couverture/">Couverture</a>
+        <a href="/charpente/">Charpente</a>
+        <a href="/realisations/">Réalisations</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </header>
+    <main><slot /></main>
+    <footer class="site-footer">
+      <a class="brand brand-light" href="/">tuile<span>&</span>ardoise</a>
+      <p>Couverture en ardoise naturelle · Charpente traditionnelle</p>
+      <p>L’Île-Bouchard et environs · Indre-et-Loire</p>
+      <small>© {new Date().getFullYear()} tuile&ardoise</small>
+    </footer>
+  </body>
+</html>
