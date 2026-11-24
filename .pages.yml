@@ -1,0 +1,58 @@
+media:
+  - name: images
+    label: Photographies
+    input: public/images
+    output: /images
+    extensions: [jpg, jpeg, png, webp, avif]
+    categories: [image]
+    rename: safe
+
+content:
+  - name: realisations
+    label: Réalisations
+    type: collection
+    path: src/content/realisations
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      fields: [title, location, category, date]
+      primary: title
+      sort: [date, title]
+    fields:
+      - name: title
+        label: Titre du chantier
+        type: string
+        required: true
+      - name: date
+        label: Date du chantier
+        type: date
+      - name: location
+        label: Commune
+        type: string
+        required: true
+      - name: category
+        label: Type de travaux
+        type: select
+        options:
+          values: [Couverture, Charpente, Rénovation, Réparation]
+      - name: cover
+        label: Photo principale
+        type: image
+        options:
+          media: images
+          path: realisations
+        required: true
+      - name: gallery
+        label: Autres photos
+        type: image
+        options:
+          media: images
+          path: realisations
+          multiple:
+            max: 12
+      - name: featured
+        label: Mettre en avant sur l'accueil
+        type: boolean
+      - name: body
+        label: Description des travaux
+        type: rich-text
